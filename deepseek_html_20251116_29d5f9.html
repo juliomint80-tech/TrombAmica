@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrombaMadrid - Encuentra Pareja</title>
+    <style>
+        :root {
+            --primary-color: #e91e63;
+            --secondary-color: #3f51b5;
+            --light-color: #f5f5f5;
+            --dark-color: #333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .logo span {
+            color: #ffeb3b;
+        }
+        
+        .header-btn {
+            background-color: #ffeb3b;
+            color: var(--dark-color);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .header-btn:hover {
+            background-color: #fdd835;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .back-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: none;
+            transition: all 0.3s;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .back-btn.visible {
+            display: block;
+        }
+        
+        .categories {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--dark-color);
+        }
+        
+        .category-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-img {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .chico-busca-chica .category-img {
+            background: linear-gradient(45deg, #3f51b5, #2196f3);
+        }
+        
+        .chica-busca-chico .category-img {
+            background: linear-gradient(45deg, #e91e63, #f44336);
+        }
+        
+        .category-content {
+            padding: 1.5rem;
+        }
+        
+        .category-content h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        .ads-section {
+            padding: 2rem 0;
+            background-color: #f0f0f0;
+            min-height: 80vh;
+        }
+        
+        .ads-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+        
+        .ads-header h2 {
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+        
+        .ads-header p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        .ads-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin: 0 1rem;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .ads-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .ad-item {
+            padding: 1.5rem;
+            border: 1px solid #eee;
+            border-radius: var(--border-radius);
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .ad-item:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .ad-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .ad-description {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .ad-actions {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .contact-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .contact-btn:hover {
+            background-color: #d81b60;
+            transform: translateY(-2px);
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+        
+        .form-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #d81b60;
+            transform: translateY(-2px);
+        }
+        
+        .btn-cancel {
+            background-color: #6c757d;
+        }
+        
+        .btn-cancel:hover {
+            background-color: #5a6268;
+        }
+        
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            display: none;
+        }
+        
+        .required::after {
+            content: " *";
+            color: var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .back-btn {
+                position: relative;
+                left: 0;
+                top: 0;
+                transform: none;
+                margin-bottom: 1rem;
+                font-size: 2.5rem;
+            }
+            
+            .back-btn:hover {
+                transform: none;
+            }
+            
+            .ads-container {
+                margin: 0 0.5rem;
+                padding: 1rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <button class="back-btn" onclick="showSection('inicio')">←</button>
+                <div class="logo">Tromba<span>Madrid</span></div>
+                <button class="header-btn" onclick="showSection('publicar')">Publicar Anuncio Gratis</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Sección INICIO -->
+        <section id="inicio-section">
+            <div class="categories">
+                <div class="container">
+                    <h2 class="section-title">Categorías de Contactos</h2>
+                    <div class="category-cards">
+                        <div class="category-card chico-busca-chica" onclick="showSection('hombres')">
+                            <div class="category-img">
+                                Chico Busca Chica
+                            </div>
+                            <div class="category-content">
+                                <h3>Chico Busca Chica</h3>
+                                <p>Hombres interesados en conocer mujeres en Madrid. Encuentra citas, relaciones serias o amistad.</p>
+                            </div>
+                        </div>
+                        <div class="category-card chica-busca-chico" onclick="showSection('mujeres')">
+                            <div class="category-img">
+                                Chica Busca Chico
+                            </div>
+                            <div class="category-content">
+                                <h3>Chica Busca Chico</h3>
+                                <p>Mujeres interesadas en conocer hombres en Madrid. Encuentra el compañero ideal para ti.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección HOMBRES -->
+        <section id="hombres-section" class="hidden">
+            <div class="ads-section">
+                <div class="ads-header">
+                    <h2>Anuncios de Hombres en Madrid</h2>
+                    <p>Hombres interesados en conocer mujeres. Encuentra citas, relaciones serias o amistad.</p>
+                </div>
+                <div class="ads-container">
+                    <div class="ads-list" id="hombresList">
+                        <div class="loading">Cargando anuncios...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección MUJERES -->
+        <section id="mujeres-section" class="hidden">
+            <div class="ads-section">
+                <div class="ads-header">
+                    <h2>Anuncios de Mujeres en Madrid</h2>
+                    <p>Mujeres interesadas en conocer hombres. Encuentra el compañero ideal para ti.</p>
+                </div>
+                <div class="ads-container">
+                    <div class="ads-list" id="mujeresList">
+                        <div class="loading">Cargando anuncios...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección PUBLICAR -->
+        <section id="publicar-section" class="hidden">
+            <div class="container">
+                <h2 class="section-title">Publicar Anuncio</h2>
+                <div class="form-container">
+                    <div class="success-message" id="successMessage">
+                        ¡Tu anuncio ha sido publicado con éxito!
+                    </div>
+                    <form id="anuncioForm">
+                        <div class="form-group">
+                            <label for="nombre" class="required">Nombre o Apodo</label>
+                            <input type="text" id="nombre" class="form-control" 
+                                   placeholder="Ej: Carlos, Ana..." required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="edad" class="required">Edad</label>
+                                <input type="number" id="edad" class="form-control" min="18" max="99" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="zona" class="required">Zona de Madrid</label>
+                                <select id="zona" class="form-control" required>
+                                    <option value="">Selecciona una zona</option>
+                                    <option value="Centro">Centro</option>
+                                    <option value="Chamberí">Chamberí</option>
+                                    <option value="Salamanca">Salamanca</option>
+                                    <option value="Retiro">Retiro</option>
+                                    <option value="Chueca">Chueca</option>
+                                    <option value="Malasaña">Malasaña</option>
+                                    <option value="Moncloa">Moncloa</option>
+                                    <option value="Latina">Latina</option>
+                                    <option value="Carabanchel">Carabanchel</option>
+                                    <option value="Usera">Usera</option>
+                                    <option value="Villaverde">Villaverde</option>
+                                    <option value="Puente de Vallecas">Puente de Vallecas</option>
+                                    <option value="Moratalaz">Moratalaz</option>
+                                    <option value="Ciudad Lineal">Ciudad Lineal</option>
+                                    <option value="Hortaleza">Hortaleza</option>
+                                    <option value="Fuencarral-El Pardo">Fuencarral-El Pardo</option>
+                                    <option value="Moncloa-Aravaca">Moncloa-Aravaca</option>
+                                    <option value="Tetuán">Tetuán</option>
+                                    <option value="Chamartín">Chamartín</option>
+                                    <option value="Barajas">Barajas</option>
+                                    <option value="Vicálvaro">Vicálvaro</option>
+                                    <option value="San Blas-Canillejas">San Blas-Canillejas</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="categoria" class="required">Categoría</label>
+                            <select id="categoria" class="form-control" required>
+                                <option value="">Selecciona una categoría</option>
+                                <option value="chico-busca-chica">Chico Busca Chica</option>
+                                <option value="chica-busca-chico">Chica Busca Chico</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contacto" class="required">Datos de contacto</label>
+                            <input type="text" id="contacto" class="form-control" 
+                                   placeholder="Email, Instagram, Telegram..." required>
+                            <small style="color: #666;">Este contacto se revelará a usuarios interesados</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="descripcion" class="required">Descripción</label>
+                            <textarea id="descripcion" class="form-control" 
+                                      placeholder="Describe quién eres, qué buscas, tus intereses, aficiones..." 
+                                      required></textarea>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-cancel" onclick="showSection('inicio')">Cancelar</button>
+                            <button type="submit" class="btn">Publicar Anuncio</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 🔧 CONFIGURACIÓN - URLs actualizadas con tu Google Apps Script
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwbioNwJ5CQHaXmHo9t2DQnK6SbFz3Kwk3WyZ1M1utQSmqRiekcC6L11NBmevD5N5fP/exec';
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRQPaT5wCrrEfnHeosY-sdSW8qFDH5ubj4OIM6kx59mZ9Rz_qcU7yHF-47uvjhSPKECqfHbZ2VJPwgs/pub?gid=0&single=true&output=csv';
+
+        // Función para mostrar secciones
+        function showSection(sectionName) {
+            document.querySelectorAll('main > section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            const sectionToShow = document.getElementById(sectionName + '-section');
+            if (sectionToShow) {
+                sectionToShow.classList.remove('hidden');
+            }
+            
+            const backBtn = document.querySelector('.back-btn');
+            if (sectionName === 'inicio') {
+                backBtn.classList.remove('visible');
+            } else {
+                backBtn.classList.add('visible');
+            }
+            
+            if (sectionName === 'hombres') {
+                cargarAnuncios('chico-busca-chica', 'hombresList');
+            } else if (sectionName === 'mujeres') {
+                cargarAnuncios('chica-busca-chico', 'mujeresList');
+            }
+            
+            window.scrollTo(0, 0);
+        }
+
+        // Función para cargar anuncios desde Google Sheets
+        async function cargarAnuncios(categoria, elementoId) {
+            const lista = document.getElementById(elementoId);
+            lista.innerHTML = '<div class="loading">Cargando anuncios...</div>';
+            
+            try {
+                const response = await fetch(SHEET_URL);
+                const csvText = await response.text();
+                
+                const lineas = csvText.split('\n');
+                const anuncios = [];
+                
+                for (let i = 1; i < lineas.length; i++) {
+                    const linea = lineas[i].trim();
+                    if (!linea) continue;
+                    
+                    const columnas = linea.split(',');
+                    if (columnas.length >= 7) {
+                        const anuncio = {
+                            timestamp: columnas[0] || '',
+                            nombre: columnas[1] || '',
+                            edad: columnas[2] || '',
+                            zona: columnas[3] || '',
+                            categoria: columnas[4] || '',
+                            descripcion: columnas[5] || '',
+                            contacto: columnas[6] || ''
+                        };
+                        
+                        if (anuncio.categoria === categoria && anuncio.nombre) {
+                            anuncios.push(anuncio);
+                        }
+                    }
+                }
+                
+                if (anuncios.length === 0) {
+                    lista.innerHTML = '<div class="loading">No hay anuncios en esta categoría todavía.</div>';
+                    return;
+                }
+                
+                lista.innerHTML = '';
+                anuncios.forEach((anuncio) => {
+                    const adItem = document.createElement('div');
+                    adItem.className = 'ad-item';
+                    adItem.innerHTML = `
+                        <div class="ad-title">${anuncio.nombre}, ${anuncio.edad} años - ${anuncio.zona}</div>
+                        <div class="ad-description">${anuncio.descripcion}</div>
+                        <div class="ad-actions">
+                            <button class="contact-btn" onclick="mostrarContacto('${anuncio.contacto.replace(/'/g, "\\'")}')">
+                                📧 Ver Contacto
+                            </button>
+                        </div>
+                    `;
+                    lista.appendChild(adItem);
+                });
+                
+            } catch (error) {
+                console.error('Error cargando anuncios:', error);
+                lista.innerHTML = '<div class="loading">Error cargando anuncios. Intenta más tarde.</div>';
+            }
+        }
+
+        // Función para mostrar contacto
+        function mostrarContacto(contacto) {
+            alert(`📞 Contacta con esta persona:\n\n${contacto}\n\n¡Buena suerte! 🍀`);
+        }
+
+        // Manejar el formulario de publicación - CON GOOGLE APPS SCRIPT
+        document.getElementById('anuncioForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Obtener datos del formulario
+            const nombre = document.getElementById('nombre').value;
+            const edad = document.getElementById('edad').value;
+            const zona = document.getElementById('zona').value;
+            const categoria = document.getElementById('categoria').value;
+            const contacto = document.getElementById('contacto').value;
+            const descripcion = document.getElementById('descripcion').value;
+            
+            // Validaciones adicionales
+            if (edad < 18 || edad > 99) {
+                alert('La edad debe estar entre 18 y 99 años');
+                return;
+            }
+            
+            if (descripcion.length < 10) {
+                alert('La descripción debe tener al menos 10 caracteres');
+                return;
+            }
+            
+            // Mostrar loading
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Publicando...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Enviar datos al Google Apps Script
+                const formData = new URLSearchParams();
+                formData.append('nombre', nombre);
+                formData.append('edad', edad);
+                formData.append('zona', zona);
+                formData.append('categoria', categoria);
+                formData.append('descripcion', descripcion);
+                formData.append('contacto', contacto);
+                
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Mostrar mensaje de éxito
+                    const successMessage = document.getElementById('successMessage');
+                    successMessage.style.display = 'block';
+                    
+                    // Limpiar formulario
+                    document.getElementById('anuncioForm').reset();
+                    
+                    // Ocultar mensaje después de 3 segundos y volver al inicio
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                        showSection('inicio');
+                    }, 3000);
+                } else {
+                    alert('Error al publicar: ' + result.error);
+                }
+                
+            } catch (error) {
+                alert('Error de conexión. Intenta nuevamente.');
+            } finally {
+                // Restaurar botón
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('inicio');
+        });
+    </script>
+</body>
+</html>
