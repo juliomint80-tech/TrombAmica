@@ -206,6 +206,7 @@
             border-radius: var(--border-radius);
             transition: all 0.3s;
             background: white;
+            position: relative;
         }
         
         .ad-item:hover {
@@ -247,75 +248,16 @@
             transform: translateY(-2px);
         }
         
-        /* BOTTOMSHEET STYLES */
-        .bottom-sheet {
-            position: fixed;
-            bottom: -100%;
-            left: 0;
-            width: 100%;
-            height: 90vh;
-            background: white;
-            border-radius: 20px 20px 0 0;
-            box-shadow: 0 -5px 25px rgba(0,0,0,0.3);
-            z-index: 1000;
-            transition: bottom 0.3s ease;
-        }
-        
-        .bottom-sheet.active {
-            bottom: 0;
-        }
-        
-        .bottom-sheet-header {
-            padding: 20px;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .bottom-sheet-header h3 {
-            margin: 0;
-            color: #333;
-        }
-        
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #666;
-            padding: 5px;
-        }
-        
-        .close-btn:hover {
-            color: #333;
-        }
-        
-        .bottom-sheet-content {
-            height: calc(100% - 80px);
-            overflow: hidden;
-        }
-        
-        .bottom-sheet-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 0 0 20px 20px;
-        }
-        
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 999;
-            display: none;
-        }
-        
-        .overlay.active {
-            display: block;
+        .new-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #4caf50;
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
         }
         
         .hidden {
@@ -326,6 +268,148 @@
             text-align: center;
             padding: 2rem;
             color: #666;
+        }
+        
+        .form-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #d81b60;
+            transform: translateY(-2px);
+        }
+        
+        .btn-cancel {
+            background-color: #6c757d;
+        }
+        
+        .btn-cancel:hover {
+            background-color: #5a6268;
+        }
+        
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            display: none;
+        }
+        
+        .required::after {
+            content: " *";
+            color: var(--primary-color);
+        }
+        
+        /* Modal CAPTCHA */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .modal h3 {
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        .modal p {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+        
+        .captcha-question {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 1rem 0;
+        }
+        
+        .captcha-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            text-align: center;
         }
         
         @media (max-width: 768px) {
@@ -352,40 +436,23 @@
                 padding: 1rem;
             }
             
-            .bottom-sheet {
-                height: 85vh;
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Overlay para fondo oscuro -->
-    <div class="overlay" id="overlay" onclick="cerrarBottomSheet()"></div>
-    
-    <!-- Bottom Sheet para el formulario -->
-    <div class="bottom-sheet" id="bottomSheet">
-        <div class="bottom-sheet-header">
-            <h3>📢 Publicar Anuncio</h3>
-            <button class="close-btn" onclick="cerrarBottomSheet()">×</button>
-        </div>
-        <div class="bottom-sheet-content">
-            <iframe 
-                src="https://docs.google.com/forms/d/e/1FAIpQLSdMxqpmxF0t8whJcyGXLpdxrYPRmXdYrymYvB3DBr0g5f7DqA/viewform?embedded=true" 
-                class="bottom-sheet-iframe"
-                frameborder="0"
-                marginheight="0"
-                marginwidth="0">
-                Cargando…
-            </iframe>
-        </div>
-    </div>
-
     <header>
         <div class="container">
             <div class="header-content">
                 <button class="back-btn" onclick="showSection('inicio')">←</button>
                 <div class="logo">Tromba<span>Madrid</span></div>
-                <button class="header-btn" onclick="abrirBottomSheet()">Publicar Anuncio Gratis</button>
+                <button class="header-btn" onclick="showSection('publicar')">Publicar Anuncio Gratis</button>
             </div>
         </div>
     </header>
@@ -449,31 +516,113 @@
                 </div>
             </div>
         </section>
+
+        <!-- Sección PUBLICAR -->
+        <section id="publicar-section" class="hidden">
+            <div class="container">
+                <h2 class="section-title">Publicar Anuncio</h2>
+                <div class="form-container">
+                    <div class="success-message" id="successMessage">
+                        ¡Tu anuncio ha sido publicado con éxito!
+                    </div>
+                    <form id="anuncioForm">
+                        <div class="form-group">
+                            <label for="nombre" class="required">Nombre o Apodo</label>
+                            <input type="text" id="nombre" class="form-control" 
+                                   placeholder="Ej: Carlos, Ana..." required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="edad" class="required">Edad</label>
+                                <input type="number" id="edad" class="form-control" min="18" max="99" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="zona" class="required">Zona de Madrid</label>
+                                <select id="zona" class="form-control" required>
+                                    <option value="">Selecciona una zona</option>
+                                    <option value="Centro">Centro</option>
+                                    <option value="Chamberí">Chamberí</option>
+                                    <option value="Salamanca">Salamanca</option>
+                                    <option value="Retiro">Retiro</option>
+                                    <option value="Chueca">Chueca</option>
+                                    <option value="Malasaña">Malasaña</option>
+                                    <option value="Moncloa">Moncloa</option>
+                                    <option value="Latina">Latina</option>
+                                    <option value="Carabanchel">Carabanchel</option>
+                                    <option value="Usera">Usera</option>
+                                    <option value="Villaverde">Villaverde</option>
+                                    <option value="Puente de Vallecas">Puente de Vallecas</option>
+                                    <option value="Moratalaz">Moratalaz</option>
+                                    <option value="Ciudad Lineal">Ciudad Lineal</option>
+                                    <option value="Hortaleza">Hortaleza</option>
+                                    <option value="Fuencarral-El Pardo">Fuencarral-El Pardo</option>
+                                    <option value="Moncloa-Aravaca">Moncloa-Aravaca</option>
+                                    <option value="Tetuán">Tetuán</option>
+                                    <option value="Chamartín">Chamartín</option>
+                                    <option value="Barajas">Barajas</option>
+                                    <option value="Vicálvaro">Vicálvaro</option>
+                                    <option value="San Blas-Canillejas">San Blas-Canillejas</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="categoria" class="required">Categoría</label>
+                            <select id="categoria" class="form-control" required>
+                                <option value="">Selecciona una categoría</option>
+                                <option value="chico-busca-chica">Chico Busca Chica</option>
+                                <option value="chica-busca-chico">Chica Busca Chico</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contacto" class="required">Datos de contacto</label>
+                            <input type="text" id="contacto" class="form-control" 
+                                   placeholder="Email, Instagram, Telegram..." required>
+                            <small style="color: #666;">Este contacto se revelará a usuarios interesados</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="descripcion" class="required">Descripción</label>
+                            <textarea id="descripcion" class="form-control" 
+                                      placeholder="Describe quién eres, qué buscas, tus intereses, aficiones..." 
+                                      required></textarea>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-cancel" onclick="showSection('inicio')">Cancelar</button>
+                            <button type="submit" class="btn">Publicar Anuncio</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
     </main>
 
+    <!-- Modal CAPTCHA -->
+    <div id="captchaModal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Verificación Anti-Robot</h3>
+            <p>Resuelve esta operación para ver el contacto:</p>
+            <div class="captcha-question" id="captchaQuestion"></div>
+            <input type="number" id="captchaAnswer" class="captcha-input" placeholder="Tu respuesta">
+            <div class="form-actions">
+                <button type="button" class="btn btn-cancel" onclick="cerrarCaptcha()">Cancelar</button>
+                <button type="button" class="btn" onclick="verificarCaptcha()">Verificar</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // URLs de Google Sheets para cargar anuncios
+        // 🔧 CONFIGURACIÓN ACTUALIZADA
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwbioNwJ5CQHaXmHo9t2DQnK6SbFz3Kwk3WyZ1M1utQSmqRiekcC6L11NBmevD5N5fP/exec';
         const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1hYk0lss8N9NTvGlZMVfg_kJCF6iwTO-AHmj2z5pyEpw/gviz/tq?tqx=out:csv';
 
-        // Funciones del BottomSheet
-        function abrirBottomSheet() {
-            document.getElementById('bottomSheet').classList.add('active');
-            document.getElementById('overlay').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function cerrarBottomSheet() {
-            document.getElementById('bottomSheet').classList.remove('active');
-            document.getElementById('overlay').classList.remove('active');
-            document.body.style.overflow = 'auto';
-            
-            // Recargar la página después de cerrar para actualizar posibles nuevos anuncios
-            setTimeout(() => {
-                if (window.location.hash === '#actualizar') {
-                    window.location.reload();
-                }
-            }, 1000);
-        }
+        // Variables para el CAPTCHA
+        let captchaNum1, captchaNum2, captchaResult;
+        let contactoActual = '';
 
         // Función para mostrar secciones
         function showSection(sectionName) {
@@ -494,9 +643,9 @@
             }
             
             if (sectionName === 'hombres') {
-                cargarAnuncios('Chico busca chica', 'hombresList');
+                cargarAnuncios('chico-busca-chica', 'hombresList');
             } else if (sectionName === 'mujeres') {
-                cargarAnuncios('Chica busca chico', 'mujeresList');
+                cargarAnuncios('chica-busca-chico', 'mujeresList');
             }
             
             window.scrollTo(0, 0);
@@ -518,54 +667,56 @@
                     const linea = lineas[i].trim();
                     if (!linea) continue;
                     
-                    // Procesar CSV correctamente (manejar comas dentro de campos)
-                    const columnas = [];
-                    let enCampo = false;
-                    let campoActual = '';
-                    
-                    for (let char of linea) {
-                        if (char === '"') {
-                            enCampo = !enCampo;
-                        } else if (char === ',' && !enCampo) {
-                            columnas.push(campoActual);
-                            campoActual = '';
-                        } else {
-                            campoActual += char;
-                        }
-                    }
-                    columnas.push(campoActual);
-                    
-                    if (columnas.length >= 6) {
+                    // Manejar comas dentro de campos entre comillas
+                    const columnas = parseCSVLine(linea);
+                    if (columnas.length >= 7) {
                         const anuncio = {
                             timestamp: columnas[0] || '',
                             nombre: columnas[1] || '',
                             edad: columnas[2] || '',
                             zona: columnas[3] || '',
                             categoria: columnas[4] || '',
-                            contacto: columnas[5] || '',
-                            descripcion: columnas[6] || ''
+                            descripcion: columnas[5] || '',
+                            contacto: columnas[6] || ''
                         };
                         
+                        // Verificar si el anuncio es de la categoría correcta y tiene nombre
                         if (anuncio.categoria === categoria && anuncio.nombre) {
+                            // Verificar si el anuncio es nuevo (< 24 horas)
+                            const fechaAnuncio = new Date(anuncio.timestamp);
+                            const ahora = new Date();
+                            const diferenciaHoras = (ahora - fechaAnuncio) / (1000 * 60 * 60);
+                            anuncio.esNuevo = diferenciaHoras < 24;
+                            
                             anuncios.push(anuncio);
                         }
                     }
                 }
                 
                 if (anuncios.length === 0) {
-                    lista.innerHTML = '<div class="loading">No hay anuncios en esta categoría todavía. ¡Sé el primero en publicar!</div>';
+                    lista.innerHTML = '<div class="loading">No hay anuncios en esta categoría todavía.</div>';
                     return;
                 }
+                
+                // Ordenar por fecha (más recientes primero)
+                anuncios.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
                 
                 lista.innerHTML = '';
                 anuncios.forEach((anuncio) => {
                     const adItem = document.createElement('div');
                     adItem.className = 'ad-item';
+                    
+                    let badgeHTML = '';
+                    if (anuncio.esNuevo) {
+                        badgeHTML = '<div class="new-badge">NUEVO</div>';
+                    }
+                    
                     adItem.innerHTML = `
+                        ${badgeHTML}
                         <div class="ad-title">${anuncio.nombre}, ${anuncio.edad} años - ${anuncio.zona}</div>
                         <div class="ad-description">${anuncio.descripcion}</div>
                         <div class="ad-actions">
-                            <button class="contact-btn" onclick="mostrarContacto('${anuncio.contacto.replace(/'/g, "\\'")}')">
+                            <button class="contact-btn" onclick="solicitarContacto('${anuncio.contacto.replace(/'/g, "\\'")}')">
                                 📧 Ver Contacto
                             </button>
                         </div>
@@ -575,19 +726,143 @@
                 
             } catch (error) {
                 console.error('Error cargando anuncios:', error);
-                lista.innerHTML = '<div class="loading">Error cargando anuncios. Los datos se actualizan cada 5 minutos.</div>';
+                lista.innerHTML = '<div class="loading">Error cargando anuncios. Intenta más tarde.</div>';
             }
         }
 
-        // Función para mostrar contacto
+        // Función para parsear líneas CSV correctamente
+        function parseCSVLine(linea) {
+            const resultado = [];
+            let campoActual = '';
+            let entreComillas = false;
+            
+            for (let i = 0; i < linea.length; i++) {
+                const caracter = linea[i];
+                
+                if (caracter === '"') {
+                    entreComillas = !entreComillas;
+                } else if (caracter === ',' && !entreComillas) {
+                    resultado.push(campoActual);
+                    campoActual = '';
+                } else {
+                    campoActual += caracter;
+                }
+            }
+            
+            resultado.push(campoActual);
+            return resultado;
+        }
+
+        // Función para solicitar contacto (con CAPTCHA)
+        function solicitarContacto(contacto) {
+            contactoActual = contacto;
+            generarCaptcha();
+            document.getElementById('captchaModal').classList.remove('hidden');
+        }
+
+        // Función para generar CAPTCHA simple
+        function generarCaptcha() {
+            captchaNum1 = Math.floor(Math.random() * 10) + 1;
+            captchaNum2 = Math.floor(Math.random() * 10) + 1;
+            captchaResult = captchaNum1 + captchaNum2;
+            
+            document.getElementById('captchaQuestion').textContent = `${captchaNum1} + ${captchaNum2} = ?`;
+            document.getElementById('captchaAnswer').value = '';
+        }
+
+        // Función para verificar CAPTCHA
+        function verificarCaptcha() {
+            const respuestaUsuario = parseInt(document.getElementById('captchaAnswer').value);
+            
+            if (respuestaUsuario === captchaResult) {
+                mostrarContacto(contactoActual);
+                cerrarCaptcha();
+            } else {
+                alert('❌ Respuesta incorrecta. Intenta nuevamente.');
+                generarCaptcha();
+            }
+        }
+
+        // Función para cerrar modal CAPTCHA
+        function cerrarCaptcha() {
+            document.getElementById('captchaModal').classList.add('hidden');
+            contactoActual = '';
+        }
+
+        // Función para mostrar contacto (solo después de CAPTCHA exitoso)
         function mostrarContacto(contacto) {
             alert(`📞 Contacta con esta persona:\n\n${contacto}\n\n¡Buena suerte! 🍀`);
         }
 
-        // Cerrar bottomsheet con ESC
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                cerrarBottomSheet();
+        // Manejar el formulario de publicación
+        document.getElementById('anuncioForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Obtener datos del formulario
+            const nombre = document.getElementById('nombre').value;
+            const edad = document.getElementById('edad').value;
+            const zona = document.getElementById('zona').value;
+            const categoria = document.getElementById('categoria').value;
+            const contacto = document.getElementById('contacto').value;
+            const descripcion = document.getElementById('descripcion').value;
+            
+            // Validaciones adicionales
+            if (edad < 18 || edad > 99) {
+                alert('La edad debe estar entre 18 y 99 años');
+                return;
+            }
+            
+            if (descripcion.length < 10) {
+                alert('La descripción debe tener al menos 10 caracteres');
+                return;
+            }
+            
+            // Mostrar loading
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Publicando...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Enviar datos al Google Apps Script
+                const formData = new URLSearchParams();
+                formData.append('nombre', nombre);
+                formData.append('edad', edad);
+                formData.append('zona', zona);
+                formData.append('categoria', categoria);
+                formData.append('descripcion', descripcion);
+                formData.append('contacto', contacto);
+                
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Mostrar mensaje de éxito
+                    const successMessage = document.getElementById('successMessage');
+                    successMessage.style.display = 'block';
+                    
+                    // Limpiar formulario
+                    document.getElementById('anuncioForm').reset();
+                    
+                    // Ocultar mensaje después de 3 segundos y volver al inicio
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                        showSection('inicio');
+                    }, 3000);
+                } else {
+                    alert('Error al publicar: ' + result.error);
+                }
+                
+            } catch (error) {
+                alert('Error de conexión. Intenta nuevamente.');
+            } finally {
+                // Restaurar botón
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
             }
         });
 
